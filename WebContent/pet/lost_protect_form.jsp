@@ -3,7 +3,6 @@
 <%@page import="model.*" %>
 <%@page import="java.util.*" %>
 
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -37,15 +36,14 @@
 <table border = 1>
    <c:forEach var="pet" items="${petList}">
       <tr style="height:45%; width:90%">
-         <td width="30%" height="90%" style="text-align:center"><img src= "<c:url value='${pet.image}' />" style="max-width: 90%; max-height:90%;" /></td>
+         <td width="30%" height="90%" style="text-align:center"><img src= "<c:url value='${pet.image}' />" style="max-width: 50%; max-height:50%;" /></td>
          <td width="50%">
-       나이 : ${pet.age}살   <br>
-      성별 : ${pet.gender}  <br>
-      몸무게: ${pet.weight}kg <br>
-      품종: ${pet.kind}     <br> 
-      날짜: ${pet.pdate} <br>
-      특이사항: ${pet.explanation} 
-                    
+       나이 : ${pet.age}살   <br> <br>
+      성별 : ${pet.gender}  <br> <br>
+      몸무게: ${pet.weight}kg <br> <br>
+      품종: ${pet.kind}     <br>  <br>
+      날짜: ${pet.pdate} <br> <br>
+      특이사항: ${pet.explanation}      
          </td>
           
           <c:if test="${pet.lost == 1 }">

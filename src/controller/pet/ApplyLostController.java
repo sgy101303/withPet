@@ -34,11 +34,10 @@ public class ApplyLostController implements Controller{
        String variety = request.getParameter("variety");
        String pdate = request.getParameter("pdate");
        String memo = request.getParameter("memo"); 
+       String userId = request.getParameter("userId");
        
        String city = request.getParameter("city");
        String gu = request.getParameter("gu");
-       
-       String userId = request.getParameter("userId");
        
        try {
             if(city.equals("seoul") && gu.equals("강남구")) {
@@ -290,7 +289,7 @@ public class ApplyLostController implements Controller{
           
        
        hospitalId = areaId;
-       Pet pet = new Pet("모름", gen, variety, Integer.parseInt(age), kind, pdate, memo, Float.parseFloat(weight), "00000000" , hospitalId, areaId, img, 1, 0, 0, 1);
+       Pet pet = new Pet("모름", gen, variety, Integer.parseInt(age), kind, pdate, memo, Float.parseFloat(weight), userId, hospitalId, areaId, img, 0, 0, 0, 1);
      
        petService.create(pet);
        

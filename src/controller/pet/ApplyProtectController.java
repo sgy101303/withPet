@@ -290,7 +290,7 @@ public class ApplyProtectController implements Controller{
           
        
        hospitalId = areaId;
-       Pet pet = new Pet("모름", gen, variety, Integer.parseInt(age), kind, pdate, memo, Float.parseFloat(weight), "00000000" , hospitalId, areaId, img, 1, 0, 1, 0);
+       Pet pet = new Pet("모름", gen, variety, Integer.parseInt(age), kind, pdate, memo, Float.parseFloat(weight), "00000000" , hospitalId, areaId, img, 0, 0, 1, 0);
  
        petService.create(pet);
    

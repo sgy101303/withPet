@@ -38,7 +38,7 @@ public class RequestMapping {
         mappings.put("/pet/listAdopt", new ListAdoptPetController());
         mappings.put("/pet/listAdoptFirst", new ListAdoptFController());
         mappings.put("/pet/applyprotectbutton", new ForwardController("/pet/protect_apply_form.jsp"));
-        mappings.put("/pet/applylostbutton", new ForwardController("/pet/lost_apply_form.jsp"));
+        mappings.put("/pet/applylostbutton", new GoLostApplyController());
         mappings.put("/pet/information", new ForwardController("/pet/information_form.jsp"));
         mappings.put("/pet/update", new UpdatePetController());
         mappings.put("/pet/support/form", new GoSupportFormController());
