@@ -213,7 +213,7 @@ function display() {
 	<td width="30%" height="160px" style="text-align:center"><div><img src="" id="output"></div></td>
 	<td style = "align:center; padding-left:10%;"><a style="color:red;">반드시 사진 선택 후 등록 버튼을 눌러주세요.
 	사진이 나오지 않을 경우, 버튼을 다시 클릭해주세요.</a><br><br>
-	<input type="file" id="imageFile" accept="image/*" onchange = "ResizeImage()"/>
+	<input type="file" name = "file" id="imageFile" accept="image/*" onchange = "ResizeImage()"/>
 	<input type="button" value ="사진 등록" onclick="ResizeImage()"/></td>
 
 </tr>

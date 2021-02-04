@@ -1,5 +1,12 @@
 package controller.pet;
 
+import model.dao.ImageDAO;
+import java.io.File;
+
+//파일 이름이 동일한게 나오면 자동으로 다른걸로 바꿔주고 그런 행동 해주는것
+
+import com.oreilly.servlet.*;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import java.util.List;
 
@@ -10,12 +17,43 @@ import controller.Controller;
 import model.*;
 import model.service.AreaService;
 import model.service.PetService;
+import model.service.ImgUploadService;;
 
 public class ApplyLostController implements Controller{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-       
-       PetService petService = PetService.getInstance();
-       AreaService areaService = AreaService.getInstance();
+
+    	// 해당 폴더에 이미지를 저장시킨다
+    	String uploadDir =this.getClass().getResource("").getPath();
+    	uploadDir = uploadDir.substring(1,uploadDir.indexOf(".metadata"))+"uploadTest/WebContent/uploadImage";
+
+    	// 총 100M 까지 저장 가능하게 함
+    	int maxSize = 1024 * 1024 * 100;
+    	String encoding = "UTF-8";
+
+		// 사용자가 전송한 파일정보 토대로 업로드 장소에 파일 업로드 수행할 수 있게 함
+		MultipartRequest multipartRequest
+		= new MultipartRequest(request, uploadDir, maxSize, encoding,
+				new DefaultFileRenamePolicy());
+
+		// 중복된 파일이름이 있기에 fileRealName이 실제로 서버에 저장된 경로이자 파일
+		// fineName은 사용자가 올린 파일의 이름이다
+		// 이전 클래스 name = "file" 실제 사용자가 저장한 실제 네임
+		String fileName = multipartRequest.getOriginalFileName("file");
+		// 실제 서버에 업로드 된 파일시스템 네임
+		String fileRealName = multipartRequest.getFilesystemName("file");
+
+		PetService petService = PetService.getInstance();
+		
+		int petId = petService.findPetList().size();
+	    petId += 1;
+	   
+	    // 디비에 업로드 메소드
+		ImgUploadService imgUploadService = ImgUploadService.getInstance();
+    	
+		if(imgUploadService.upload(petId, fileName, fileRealName) == -1)
+			return "/pet/mainPage.jsp";
+    
+		AreaService areaService = AreaService.getInstance();
         Area area = null;
         List<Pet> petList = null;
         petList = petService.findAdoptList();
@@ -289,7 +327,7 @@ public class ApplyLostController implements Controller{
           
        
        hospitalId = areaId;
-       Pet pet = new Pet("모름", gen, variety, Integer.parseInt(age), kind, pdate, memo, Float.parseFloat(weight), userId, hospitalId, areaId, img, 0, 0, 0, 1);
+       Pet pet = new Pet("모름", gen, variety, Integer.parseInt(age), kind, pdate, memo, Float.parseFloat(weight), userId, hospitalId, areaId, fileRealName, 0, 0, 0, 1);
      
        petService.create(pet);
        
