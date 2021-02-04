@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>입양 후기 페이지</title>
 
-<script>
+<script languate = "javascript">
    function searchCaterory() {
       var sC = document.getElementById("category");
       var valueC = sC.options[sC.selectedIndex].value;
